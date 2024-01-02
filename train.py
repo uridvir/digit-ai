@@ -37,7 +37,7 @@ class Net(nn.Module):
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
-        self.conv2_drop = nn.Dropout1d()
+        self.conv2_drop = nn.Dropout()
         self.fc1 = nn.Linear(320, 50)
         self.fc2 = nn.Linear(50, 10)
 
@@ -75,7 +75,7 @@ def train():
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
     # epochs = 8
-    epochs = 2
+    epochs = 8
 
     for epoch in range(epochs):
 

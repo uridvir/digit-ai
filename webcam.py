@@ -11,10 +11,15 @@ net.load_state_dict(torch.load("net.pth"))
 
 
 """Get input from the webcam"""
+print("Getting camera...")
+
 cap = cv.VideoCapture(0)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
+
+print("Got camera!")
+
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
