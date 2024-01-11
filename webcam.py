@@ -38,10 +38,12 @@ while True:
 
     # Crop center third of image
     w, h = image.shape
+    # print("width ", w, " height ", h)
     image = image[int(w/3):int(2*w/3), int(h/3):int(2*h/3)]
 
     # Display the resulting frame
-    cv.imshow('frame', image)
+    _image = cv.resize(image, (h, w))
+    cv.imshow('frame', _image)
     if cv.waitKey(1) == ord(' '):
         """Feed frame into neural net"""
 
@@ -49,6 +51,7 @@ while True:
         plt.imshow(image)
         plt.show()
         data = transforms.ToTensor()(image)
+        data = transforms.Normalize(mean=(0.5,), std=(0.5,))(data)
         response = input("Use this image (y/n)?")
         if response == "y":
             print("Net result is ", torch.max(net(data), 1)[1][0].item())
